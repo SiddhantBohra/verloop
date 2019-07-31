@@ -28,7 +28,7 @@ res = api.model('results', {
 })
 
 
-@ns.route('/')
+@ns.route('')
 class TodoList(Resource):
     '''Get top repo of a organization'''
     @ns.doc('github')
@@ -38,8 +38,7 @@ class TodoList(Resource):
         '''Create a new task'''
         orgname = api.payload
         orgname = orgname['org']
-        url = "https://github.com/search?o=desc&q=" + \
-            orgname + "&s=stars&type=Repositories"
+        url = 'https://github.com/search?q=user%3A' + orgname + '&s=stars&type=Repositories'
         request = urllib.request.Request(url)
         html = urllib.request.urlopen(request).read()
         soup = BeautifulSoup(html, 'html.parser')
